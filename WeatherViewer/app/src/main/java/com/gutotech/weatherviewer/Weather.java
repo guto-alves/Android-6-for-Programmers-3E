@@ -7,22 +7,24 @@ import java.util.TimeZone;
 
 public class Weather {
     public final String dayOfWeek;
+    public final String temp;
     public final String minTemp;
     public final String maxTemp;
     public final String humidity;
     public final String description;
     public final String iconURL;
 
-    public Weather(long timeStamp, double minTemp, double maxTemp, double humidity, String description, String iconName) {
+    public Weather(long timeStamp, double temp, double minTemp, double maxTemp, double humidity, String description, String iconName) {
         NumberFormat numberFormat = NumberFormat.getInstance();
         numberFormat.setMaximumFractionDigits(0);
 
         this.dayOfWeek = convertTimeStampToDay(timeStamp);
+        this.temp = numberFormat.format(temp) + "\u00B0F";
         this.minTemp = numberFormat.format(minTemp) + "\u00B0F";
         this.maxTemp = numberFormat.format(maxTemp) + "\u00B0F";
         this.humidity = NumberFormat.getPercentInstance().format(humidity / 100.0);
         this.description = description;
-        this.iconURL = "http://openweathermap.org/img/w/" + iconName + ".png";
+        this.iconURL = "https://openweathermap.org/img/w/" + iconName + ".png";
     }
 
     // convert timestamp to a day's name (e.g., Monday, Tuesday, ...)
